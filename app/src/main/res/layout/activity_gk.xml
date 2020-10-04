@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#A6F7FF"
+    android:layout_height="match_parent"
+    tools:context=".topics.GkActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="General Knowledge"
+        app:titleTextColor="@color/colorText" />
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topBar"
+        android:layout_margin="10dp"
+        android:text="Question : "
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/gkQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text1"
+        android:layout_margin="10dp"
+        android:text="Loading Question...."
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textSize="20sp" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cgOptiongk"
+        style="@style/Widget.MaterialComponents.Chip.Choice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gkQuestion"
+        android:layout_margin="20dp"
+        app:chipSpacingHorizontal="80dp"
+        app:selectionRequired="true"
+        app:singleSelection="true"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btngkSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cgOptiongk"
+        android:layout_centerHorizontal="true"
+        android:text="Submit" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btngkNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btngkSubmit"
+        android:layout_centerHorizontal="true"
+        android:text="Next Question" />
+
+    <FrameLayout
+        android:id="@+id/score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btngkNext">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/scoreT1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Questions Attempted : "
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/scoregkQuestions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@id/scoreT1"
+                android:text="1"
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/scoreT2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scoreT1"
+                android:layout_margin="10dp"
+                android:text="Correct Answers : "
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/scoregkAnswers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scoreT1"
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@id/scoreT2"
+                android:text="0"
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/scoreT3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scoreT2"
+                android:layout_margin="10dp"
+                android:text="Correct % : "
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/scoregkTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scoreT2"
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@id/scoreT3"
+                android:text="0 %"
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btngkQuit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/score"
+        android:layout_centerHorizontal="true"
+        android:text="Quit" />
+
+</RelativeLayout>

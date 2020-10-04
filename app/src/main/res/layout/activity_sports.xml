@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#EC9D9D"
+    android:layout_height="match_parent"
+    tools:context=".topics.SportsActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topBarSports"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="Sports"
+        app:titleTextColor="@color/colorText" />
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topBarSports"
+        android:layout_margin="10dp"
+        android:text="Question : "
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/sportsQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text1"
+        android:layout_margin="10dp"
+        android:text="Loading Question...."
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cgOptionSports"
+        android:layout_below="@id/sportsQuestion"
+        android:orientation="vertical" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSportsNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cgOptionSports"
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="Next Question" />
+
+    <FrameLayout
+        android:id="@+id/score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnSportsNext">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/scoreT1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Questions Attempted : "
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/scoreSportsQuestions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@id/scoreT1"
+                android:text="1"
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/scoreT2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scoreT1"
+                android:layout_margin="10dp"
+                android:text="Correct Answers : "
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/scoreSportsAnswers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scoreT1"
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@id/scoreT2"
+                android:text="0"
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/scoreT3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scoreT2"
+                android:layout_margin="10dp"
+                android:text="Correct % : "
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/scoreSportsTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scoreT2"
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@id/scoreT3"
+                android:text="0"
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/scoreT4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scoreT3"
+                android:layout_margin="10dp"
+                android:text="High Score % : "
+                android:textStyle="bold"
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/highScoreSports"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scoreT3"
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@id/scoreT4"
+                android:text="0"
+                android:textStyle="bold"
+                android:textColor="@color/colorText"
+                android:textSize="15sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/scoreT5"
+                android:text="(atleast 10 questions attempted)"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/scoreT3"
+                android:layout_margin="10dp"/>
+        </RelativeLayout>
+    </FrameLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSportsQuit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/score"
+        android:layout_centerHorizontal="true"
+        android:text="Quit" />
+
+</RelativeLayout>

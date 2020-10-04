@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1030299255640",
+    "firebase_url": "https://quizap-2b72d.firebaseio.com",
+    "project_id": "quizap-2b72d",
+    "storage_bucket": "quizap-2b72d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030299255640:android:f8095fa98dff0f8db71b2d",
+        "android_client_info": {
+          "package_name": "com.application.quizap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030299255640-i4a7qichog262cm1suem3si7agqcjc1e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ0l9hRtjUD9j7bbGqNcUrTCRv6u5AsL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030299255640-i4a7qichog262cm1suem3si7agqcjc1e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
