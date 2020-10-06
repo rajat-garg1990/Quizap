@@ -43,14 +43,14 @@ class SportsActivity : AppCompatActivity() {
 
         auth= FirebaseAuth.getInstance()
         if (auth.currentUser==null) {
-            highScoreSports.visibility = View.GONE
+            highscoreSports.visibility = View.GONE
             scoreT4.visibility = View.GONE
         }
         topBarSports.setNavigationOnClickListener { finish() }
         val prefs= getSharedPreferences("sportPref", Context.MODE_PRIVATE)
         val edit = prefs.edit()
         highScore=prefs.getInt("highScore",0)
-        highScoreSports.text=highScore.toString()
+        highscoreSports.text=highScore.toString()
         btnOptions=findViewById(R.id.cgOptionSports)
         btnOptions.gravity= Gravity.CENTER_HORIZONTAL
         loadQuestion()
@@ -63,7 +63,7 @@ class SportsActivity : AppCompatActivity() {
             if (scoreSportsQuestions.text.toString().toInt()>=10) {
                 if (scoreSportsTotal.text.toString().toInt() > highScore) {
                     highScore = scoreSportsTotal.text.toString().toInt()
-                    highScoreSports.text = highScore.toString()
+                    highscoreSports.text = highScore.toString()
                     edit.putInt("highScore", highScore).apply()
                 }
             }

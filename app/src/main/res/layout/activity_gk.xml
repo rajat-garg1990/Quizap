@@ -6,23 +6,22 @@
     android:background="#A6F7FF"
     android:layout_height="match_parent"
     tools:context=".topics.GkActivity">
-
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/topBar"
+        android:id="@+id/topBarGk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_back"
-        app:title="General Knowledge"
+        app:title="Television"
         app:titleTextColor="@color/colorText" />
 
     <TextView
         android:id="@+id/text1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/topBar"
+        android:layout_below="@id/topBarGk"
         android:layout_margin="10dp"
         android:text="Question : "
         android:textColor="@color/colorText"
@@ -40,30 +39,19 @@
         android:textColor="@color/colorText"
         android:textSize="20sp" />
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/cgOptiongk"
-        style="@style/Widget.MaterialComponents.Chip.Choice"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/cgOptionGk"
         android:layout_below="@id/gkQuestion"
+        android:orientation="vertical" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnGkNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cgOptionGk"
         android:layout_margin="20dp"
-        app:chipSpacingHorizontal="80dp"
-        app:selectionRequired="true"
-        app:singleSelection="true"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btngkSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cgOptiongk"
-        android:layout_centerHorizontal="true"
-        android:text="Submit" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btngkNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btngkSubmit"
         android:layout_centerHorizontal="true"
         android:text="Next Question" />
 
@@ -71,77 +59,143 @@
         android:id="@+id/score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btngkNext">
+        android:layout_below="@id/btnGkNext"
+        android:background="@drawable/circle">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/scoreT1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:paddingLeft="20dp"
                 android:text="Questions Attempted : "
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@id/scoreGkQuestions"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/scoregkQuestions"
-                android:layout_width="wrap_content"
+                android:id="@+id/scoreGkQuestions"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+
                 android:layout_margin="10dp"
                 android:layout_toEndOf="@id/scoreT1"
                 android:text="1"
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/scoreT1"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/scoreT2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scoreT1"
                 android:layout_margin="10dp"
+                android:paddingLeft="20dp"
                 android:text="Correct Answers : "
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@id/scoreGkAnswers"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scoreT1" />
 
             <TextView
-                android:id="@+id/scoregkAnswers"
-                android:layout_width="wrap_content"
+                android:id="@+id/scoreGkAnswers"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scoreT1"
                 android:layout_margin="10dp"
                 android:layout_toEndOf="@id/scoreT2"
                 android:text="0"
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/scoreT2"
+                app:layout_constraintTop_toBottomOf="@id/scoreGkQuestions" />
 
             <TextView
                 android:id="@+id/scoreT3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scoreT2"
                 android:layout_margin="10dp"
+                android:paddingLeft="20dp"
                 android:text="Correct % : "
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@id/scoreGkTotal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scoreT2" />
 
             <TextView
-                android:id="@+id/scoregkTotal"
-                android:layout_width="wrap_content"
+                android:id="@+id/scoreGkTotal"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scoreT2"
                 android:layout_margin="10dp"
                 android:layout_toEndOf="@id/scoreT3"
-                android:text="0 %"
+                android:text="0"
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
-        </RelativeLayout>
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/scoreT3"
+                app:layout_constraintTop_toBottomOf="@id/scoreGkAnswers" />
+
+            <TextView
+                android:id="@+id/scoreT4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scoreT3"
+                android:layout_margin="10dp"
+                android:paddingLeft="20dp"
+                android:text="High Score % : "
+                android:textColor="@color/colorText"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/highScoreGk"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scoreT3" />
+
+            <TextView
+                android:id="@+id/highScoreGk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scoreT3"
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@id/scoreT4"
+                android:text="0"
+                android:textColor="@color/colorText"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/scoreT4"
+                app:layout_constraintTop_toBottomOf="@id/scoreGkTotal" />
+
+            <TextView
+                android:id="@+id/scoreT5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scoreT3"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:paddingLeft="20dp"
+                android:paddingBottom="10dp"
+                android:text="(atleast 10 questions attempted)"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scoreT4" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btngkQuit"
+        android:id="@+id/btnGkQuit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/score"

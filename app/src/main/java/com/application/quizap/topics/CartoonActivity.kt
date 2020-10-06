@@ -56,7 +56,7 @@ class CartoonActivity : AppCompatActivity() {
         btnOptions=findViewById(R.id.cgOptionCartoon)
         btnOptions.gravity= Gravity.CENTER_HORIZONTAL
         loadQuestion()
-        btnTvNext.setOnClickListener {
+        btnCartoonNext.setOnClickListener {
             btnOptions.removeAllViewsInLayout()
             loadQuestion()
             scoreQuestion += 1

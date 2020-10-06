@@ -57,7 +57,7 @@ class MathsActivity : AppCompatActivity() {
         btnOptions=findViewById(R.id.cgOptionMath)
         btnOptions.gravity= Gravity.CENTER_HORIZONTAL
         loadQuestion()
-        btnTvNext.setOnClickListener {
+        btnMathNext.setOnClickListener {
             btnOptions.removeAllViewsInLayout()
             loadQuestion()
             scoreQuestion += 1

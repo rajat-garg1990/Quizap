@@ -1,11 +1,18 @@
 package com.application.quizap.topics
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.text.HtmlCompat
 import androidx.core.view.children
@@ -14,6 +21,7 @@ import com.application.quizap.retro.ApiService
 import com.application.quizap.retro.QuestionResponse
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_gk.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,65 +32,45 @@ import java.lang.Exception
 import kotlin.math.round
 
 class GkActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
     lateinit var correctAns: String
-    lateinit var correctChip: Chip
+    var correctChip: Button? =null
+    lateinit var btnOptions: LinearLayout
+    var scoreQuestion:Int = 1
+    var scoreAnswer:Int = 0
+    private var highScore:Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gk)
 
-        supportActionBar?.hide()
-        var scoreQuestions = findViewById<TextView>(R.id.scoregkQuestions)
-        var scoreAnswers = findViewById<TextView>(R.id.scoregkAnswers)
-        var scoreTotal = findViewById<TextView>(R.id.scoregkTotal)
-        var scoreQuestion = 1
-        var scoreAnswer = 0.0F
+        auth= FirebaseAuth.getInstance()
+        if (auth.currentUser==null) {
+            highScoreGk.visibility = View.GONE
+            scoreT4.visibility = View.GONE
+        }
+        topBarGk.setNavigationOnClickListener { finish() }
+        val prefs= getSharedPreferences("gkPref", Context.MODE_PRIVATE)
+        val edit = prefs.edit()
+        highScore=prefs.getInt("highScore",0)
+        highScoreGk.text=highScore.toString()
+        btnOptions=findViewById(R.id.cgOptionGk)
+        btnOptions.gravity= Gravity.CENTER_HORIZONTAL
         loadQuestion()
-        btngkSubmit.setOnClickListener {
-            try {
-                var chip: Chip = cgOptiongk.findViewById(cgOptiongk.checkedChipId)
-                if (chip.text == correctAns) {
-                    Toast.makeText(
-                        this,
-                        chip.text.toString() + " is correct answer. WELL DONE!!",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    chip.chipBackgroundColor =
-                        AppCompatResources.getColorStateList(this, R.color.correct)
-                    scoreAnswer += 1
-                } else {
-                    Toast.makeText(
-                        this,
-                        chip.text.toString() + " is incorrect. SORRY!!",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    chip.chipBackgroundColor =
-                        AppCompatResources.getColorStateList(this, R.color.incorrect)
-                    for (a in cgOptiongk.children) {
-                        var chips = a as Chip
-                        if (chips.text.toString() == correctAns) {
-                            correctChip = chips
-                        }
-                        chips.isClickable = false
-                    }
-                    correctChip.chipBackgroundColor =
-                        AppCompatResources.getColorStateList(this, R.color.correct)
+        btnGkNext.setOnClickListener {
+            btnOptions.removeAllViewsInLayout()
+            loadQuestion()
+            scoreQuestion += 1
+            scoreGkQuestions.text = scoreQuestion.toString()
+            scoreGkTotal.text = ((scoreAnswer * 100)/ scoreQuestion) .toString()
+            if (scoreGkQuestions.text.toString().toInt()>=10) {
+                if (scoreGkTotal.text.toString().toInt() > highScore) {
+                    highScore = scoreGkTotal.text.toString().toInt()
+                    highScoreGk.text = highScore.toString()
+                    edit.putInt("highScore", highScore).apply()
                 }
-                btngkSubmit.isClickable = false
-                scoreAnswers.text = scoreAnswer.toString()
-                scoreTotal.text = round(scoreAnswer / scoreQuestion * 100).toString()
-            } catch (e: Exception) {
-                Toast.makeText(this@GkActivity, "No Option Selected", Toast.LENGTH_LONG)
-                    .show()
             }
         }
-        btngkNext.setOnClickListener {
-            cgOptiongk.removeAllViewsInLayout()
-            loadQuestion()
-            btngkSubmit.isClickable = true
-            scoreQuestion += 1
-            scoreQuestions.text = scoreQuestion.toString()
-        }
-        btngkQuit.setOnClickListener {
+        btnGkQuit.setOnClickListener {
             MaterialAlertDialogBuilder(this).setTitle("Are you sure you want to quit this quiz?")
                 .setPositiveButton("Yes") { _, _ ->
                     finish()
@@ -98,35 +86,39 @@ class GkActivity : AppCompatActivity() {
             .build()
         val api = retro.create(ApiService::class.java)
         api.fetchGkQuestion().enqueue(object : Callback<QuestionResponse> {
+            @RequiresApi(Build.VERSION_CODES.Q)
             override fun onResponse(
                 call: Call<QuestionResponse>,
                 response: Response<QuestionResponse>
             ) {
-                //Log.e("msg","Success")
                 //var result = QuestionResponse(response.body().results)->
                 var result = response.body()?.results?.let { QuestionResponse(it) }
                 if (result != null) {
-                    if (Build.VERSION.SDK_INT>=24) {
-                        gkQuestion.text = HtmlCompat.fromHtml(result.results[0].question,HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+                    if (Build.VERSION.SDK_INT >= 24) {
+                        gkQuestion.text = HtmlCompat.fromHtml(
+                            result.results[0].question,
+                            HtmlCompat.FROM_HTML_MODE_LEGACY
+                        ).toString()
                     }
                     correctAns = result.results[0].correct_answer
                     var options = result.results[0].incorrect_answers
                     options.add(correctAns)
-                    options.shuffled()
+                    options.shuffle()
                     for (a in options) {
-                        var chip = Chip(this@GkActivity)
-                        chip.text = HtmlCompat.fromHtml(a, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+                        var chip = Button(this@GkActivity)
+                        chip.text =
+                            HtmlCompat.fromHtml(a, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
                         chip.setTextColor(resources.getColor(R.color.colorText))
-                        chip.isCheckable = true
-                        chip.chipBackgroundColor = AppCompatResources.getColorStateList(
-                            this@GkActivity,
-                            R.color.chip_theme
+                        chip.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                        chip.isClickable = false
+                        chip.gravity = Gravity.CENTER_HORIZONTAL
+                        chip.layoutParams = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
                         )
-                        chip.isClickable = true
-                        chip.isCheckedIconVisible = false
-                        chip.textStartPadding=70.0f
-                        chip.textEndPadding=70.0f
-                        cgOptiongk.addView(chip)
+                        chip.layoutParams.resolveLayoutDirection(Gravity.CENTER_HORIZONTAL)
+                        chip.setOnClickListener { checkAnswer(correctAns, chip) }
+                        btnOptions.addView(chip)
                     }
                 }
             }
@@ -135,5 +127,34 @@ class GkActivity : AppCompatActivity() {
                 Log.e("msg", "Failure")
             }
         })
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun checkAnswer(correct: String, chip: Button) {
+        for (a in btnOptions.children) {
+            var child = a as Button
+            if (child.text.toString() == correct)
+                correctChip = child
+            child.isClickable = false
+        }
+        if (chip.text==correct){
+            Toast.makeText(
+                this,
+                chip.text.toString() + " is correct answer. WELL DONE!!",
+                Toast.LENGTH_LONG
+            ).show()
+            chip.setBackgroundResource(R.color.correct)
+            scoreAnswer += 1
+        }else {
+            Toast.makeText(
+                this,
+                chip.text.toString() + " is incorrect. SORRY!!",
+                Toast.LENGTH_LONG
+            ).show()
+            chip.setBackgroundResource(R.color.incorrect)
+            correctChip?.setBackgroundResource(R.color.correct)
+        }
+        scoreGkAnswers.text = scoreAnswer.toString()
+        scoreGkTotal.text = ((scoreAnswer * 100)/ scoreQuestion) .toString()
     }
 }

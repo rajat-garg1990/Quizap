@@ -41,9 +41,9 @@
         android:textSize="20sp" />
 
     <LinearLayout
+        android:id="@+id/cgOptionBg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cgOptionBg"
         android:layout_below="@id/bgQuestion"
         android:orientation="vertical" />
 
@@ -52,111 +52,147 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/cgOptionBg"
-        android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
         android:text="Next Question" />
 
     <FrameLayout
         android:id="@+id/score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnBgNext">
+        android:layout_below="@id/btnBgNext"
+        android:background="@drawable/circle">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/scoreT1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:paddingLeft="20dp"
                 android:text="Questions Attempted : "
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@id/scoreBgQuestions"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/scoreBgQuestions"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+
                 android:layout_margin="10dp"
                 android:layout_toEndOf="@id/scoreT1"
                 android:text="1"
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/scoreT1"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/scoreT2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scoreT1"
                 android:layout_margin="10dp"
+                android:paddingLeft="20dp"
                 android:text="Correct Answers : "
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@id/scoreBgAnswers"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scoreT1" />
 
             <TextView
                 android:id="@+id/scoreBgAnswers"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scoreT1"
                 android:layout_margin="10dp"
                 android:layout_toEndOf="@id/scoreT2"
                 android:text="0"
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/scoreT2"
+                app:layout_constraintTop_toBottomOf="@id/scoreBgQuestions" />
 
             <TextView
                 android:id="@+id/scoreT3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scoreT2"
                 android:layout_margin="10dp"
+                android:paddingLeft="20dp"
                 android:text="Correct % : "
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@id/scoreBgTotal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scoreT2" />
 
             <TextView
                 android:id="@+id/scoreBgTotal"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scoreT2"
                 android:layout_margin="10dp"
                 android:layout_toEndOf="@id/scoreT3"
                 android:text="0"
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/scoreT3"
+                app:layout_constraintTop_toBottomOf="@id/scoreBgAnswers" />
+
             <TextView
                 android:id="@+id/scoreT4"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scoreT3"
                 android:layout_margin="10dp"
+                android:paddingLeft="20dp"
                 android:text="High Score % : "
-                android:textStyle="bold"
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/highScoreBg"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scoreT3" />
 
             <TextView
                 android:id="@+id/highScoreBg"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scoreT3"
                 android:layout_margin="10dp"
                 android:layout_toEndOf="@id/scoreT4"
                 android:text="0"
-                android:textStyle="bold"
                 android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/scoreT4"
+                app:layout_constraintTop_toBottomOf="@id/scoreBgTotal" />
+
             <TextView
+                android:id="@+id/scoreT5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/scoreT5"
-                android:text="(atleast 10 questions attempted)"
-                android:layout_alignParentEnd="true"
                 android:layout_below="@id/scoreT3"
-                android:layout_margin="10dp"/>
-        </RelativeLayout>
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:paddingLeft="20dp"
+                android:paddingBottom="10dp"
+                android:text="(atleast 10 questions attempted)"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scoreT4" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
     <com.google.android.material.button.MaterialButton

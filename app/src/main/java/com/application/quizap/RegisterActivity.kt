@@ -36,7 +36,6 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        supportActionBar?.hide()
         topBar.setNavigationOnClickListener { finish() }
         auth = FirebaseAuth.getInstance()
         mFirebaseDatabase=FirebaseDatabase.getInstance().getReference("users")
