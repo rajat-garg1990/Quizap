@@ -1,9 +1,13 @@
 package com.application.quizap
 
+import android.Manifest
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -14,6 +18,7 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -32,6 +37,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var imageUrl: String
     private var uri: Uri?=null
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -54,9 +60,17 @@ class RegisterActivity : AppCompatActivity() {
                 startActivityForResult(intent, 0)
             }
             camera.setOnClickListener {
-                var intent=Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                //intent.type="image/*"
-                startActivityForResult(intent,0)
+                if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED ||
+                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+                    //permission was not enabled
+                    val permission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    //show popup to request permission
+                    requestPermissions(permission, 11)
+                }
+                else{
+                    //permission already granted
+                    openCamera()
+                }
             }
         }
         textPassword.addTextChangedListener(object : TextWatcher {
@@ -124,6 +138,36 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when(requestCode) {
+            11 -> {
+                if (grantResults.isNotEmpty() && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED
+                ) {
+                    //permission from popup was granted
+                    openCamera()
+                } else {
+                    //permission from popup was denied
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun openCamera() {
+        val values = ContentValues()
+        values.put(MediaStore.Images.Media.TITLE, "New Picture")
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
+        uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        var intent=Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+        startActivityForResult(intent,1)
+    }
+
     private fun uploadImageToFirebase() {
         if (uri==null) return
         val ref=FirebaseStorage.getInstance().reference.child("images/"+UUID.randomUUID().toString())
@@ -153,6 +197,10 @@ class RegisterActivity : AppCompatActivity() {
         if (requestCode==0 && resultCode==Activity.RESULT_OK && data != null){
             //when photo is selected->
             uri=data.data
+            profile_Picture.setImageURI(uri)
+            profilePicture.isVisible=false
+        }
+        if (requestCode==1 && resultCode==Activity.RESULT_OK){
             profile_Picture.setImageURI(uri)
             profilePicture.isVisible=false
         }
