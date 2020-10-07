@@ -149,6 +149,13 @@ class DashboardActivity : AppCompatActivity() {
         cardComic.setOnClickListener {
             startActivity(Intent(this,ComicActivity::class.java))
         }
+        //politics
+        cardGk.setOnClickListener {
+            startActivity(Intent(this,GkActivity::class.java))
+        }
+        cardPolitics.setOnClickListener {
+            startActivity(Intent(this,PoliticsActivity::class.java))
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

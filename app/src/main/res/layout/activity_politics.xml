@@ -3,25 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#A6F7FF"
     android:layout_height="match_parent"
-    tools:context=".topics.GkActivity">
+    android:background="#7FC684"
+    tools:context=".topics.PoliticsActivity">
+
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/topBarGk"
+        android:id="@+id/topBarPolitics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_back"
-        app:title="General Knowledge"
+        app:title="Television"
         app:titleTextColor="@color/colorText" />
 
     <TextView
         android:id="@+id/text1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/topBarGk"
+        android:layout_below="@id/topBarPolitics"
         android:layout_margin="10dp"
         android:text="Question : "
         android:textColor="@color/colorText"
@@ -29,7 +30,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/gkQuestion"
+        android:id="@+id/politicQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/text1"
@@ -42,15 +43,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cgOptionGk"
-        android:layout_below="@id/gkQuestion"
+        android:id="@+id/cgOptionPolitics"
+        android:layout_below="@id/politicQuestion"
         android:orientation="vertical" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnGkNext"
+        android:id="@+id/btnPoliticsNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cgOptionGk"
+        android:layout_below="@id/cgOptionPolitics"
         android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
         android:text="Next Question" />
@@ -59,7 +60,7 @@
         android:id="@+id/score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnGkNext"
+        android:layout_below="@id/btnPoliticsNext"
         android:background="@drawable/circle">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,12 +76,12 @@
                 android:text="Questions Attempted : "
                 android:textColor="@color/colorText"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toStartOf="@id/scoreGkQuestions"
+                app:layout_constraintEnd_toStartOf="@id/scorePoliticsQuestions"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/scoreGkQuestions"
+                android:id="@+id/scorePoliticsQuestions"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
@@ -103,12 +104,12 @@
                 android:text="Correct Answers : "
                 android:textColor="@color/colorText"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toStartOf="@id/scoreGkAnswers"
+                app:layout_constraintEnd_toStartOf="@id/scorePoliticsAnswers"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/scoreT1" />
 
             <TextView
-                android:id="@+id/scoreGkAnswers"
+                android:id="@+id/scorePoliticsAnswers"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scoreT1"
@@ -119,7 +120,7 @@
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/scoreT2"
-                app:layout_constraintTop_toBottomOf="@id/scoreGkQuestions" />
+                app:layout_constraintTop_toBottomOf="@id/scorePoliticsQuestions" />
 
             <TextView
                 android:id="@+id/scoreT3"
@@ -131,12 +132,12 @@
                 android:text="Correct % : "
                 android:textColor="@color/colorText"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toStartOf="@id/scoreGkTotal"
+                app:layout_constraintEnd_toStartOf="@id/scorePoliticsTotal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/scoreT2" />
 
             <TextView
-                android:id="@+id/scoreGkTotal"
+                android:id="@+id/scorePoliticsTotal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scoreT2"
@@ -147,7 +148,7 @@
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/scoreT3"
-                app:layout_constraintTop_toBottomOf="@id/scoreGkAnswers" />
+                app:layout_constraintTop_toBottomOf="@id/scorePoliticsAnswers" />
 
             <TextView
                 android:id="@+id/scoreT4"
@@ -160,12 +161,12 @@
                 android:textColor="@color/colorText"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/highScoreGk"
+                app:layout_constraintEnd_toStartOf="@id/highScorePolitics"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/scoreT3" />
 
             <TextView
-                android:id="@+id/highScoreGk"
+                android:id="@+id/highScorePolitics"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scoreT3"
@@ -177,7 +178,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/scoreT4"
-                app:layout_constraintTop_toBottomOf="@id/scoreGkTotal" />
+                app:layout_constraintTop_toBottomOf="@id/scorePoliticsTotal" />
 
             <TextView
                 android:id="@+id/scoreT5"
@@ -195,7 +196,7 @@
     </FrameLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnGkQuit"
+        android:id="@+id/btnPoliticsQuit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/score"

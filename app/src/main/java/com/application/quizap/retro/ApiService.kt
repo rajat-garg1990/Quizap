@@ -51,4 +51,7 @@ interface ApiService {
 
     @GET("/api.php?amount=1&category=29&difficulty=medium&type=multiple")
     fun fetchComicsQuestion(): Call<QuestionResponse>
+
+    @GET("/api.php?amount=1&category=24&difficulty=medium&type=multiple")
+    fun fetchPoliticsQuestion(): Call<QuestionResponse>
 }
