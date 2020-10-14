@@ -31,35 +31,35 @@ import kotlin.math.round
 class TelevisionActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     lateinit var correctAns: String
-    var correctChip: Button? =null
+    var correctChip: Button? = null
     lateinit var btnOptions: LinearLayout
-    var scoreQuestion:Int = 1
-    var scoreAnswer:Int = 0
-    private var highScore:Int = 0
+    var scoreQuestion: Int = 1
+    var scoreAnswer: Int = 0
+    private var highScore: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_television)
 
-        auth= FirebaseAuth.getInstance()
-        if (auth.currentUser==null) {
+        auth = FirebaseAuth.getInstance()
+        if (auth.currentUser == null) {
             highScoreTv.visibility = View.GONE
             scoreT4.visibility = View.GONE
         }
         topBarTv.setNavigationOnClickListener { finish() }
-        val prefs= getSharedPreferences("tvPref", Context.MODE_PRIVATE)
+        val prefs = getSharedPreferences("tvPref", Context.MODE_PRIVATE)
         val edit = prefs.edit()
-        highScore=prefs.getInt("highScore",0)
-        highScoreTv.text=highScore.toString()
-        btnOptions=findViewById(R.id.cgOptionTv)
-        btnOptions.gravity=Gravity.CENTER_HORIZONTAL
+        highScore = prefs.getInt("highScore", 0)
+        highScoreTv.text = highScore.toString()
+        btnOptions = findViewById(R.id.cgOptionTv)
+        btnOptions.gravity = Gravity.CENTER_HORIZONTAL
         loadQuestion()
         btnTvNext.setOnClickListener {
             btnOptions.removeAllViewsInLayout()
             loadQuestion()
             scoreQuestion += 1
             scoreTvQuestions.text = scoreQuestion.toString()
-            scoreTvTotal.text = ((scoreAnswer * 100)/ scoreQuestion) .toString()
-            if (scoreTvQuestions.text.toString().toInt()>=10) {
+            scoreTvTotal.text = ((scoreAnswer * 100) / scoreQuestion).toString()
+            if (scoreTvQuestions.text.toString().toInt() >= 10) {
                 if (scoreTvTotal.text.toString().toInt() > highScore) {
                     highScore = scoreTvTotal.text.toString().toInt()
                     highScoreTv.text = highScore.toString()
@@ -134,7 +134,7 @@ class TelevisionActivity : AppCompatActivity() {
                 correctChip = child
             child.isClickable = false
         }
-        if (chip.text==correct){
+        if (chip.text == correct) {
             Toast.makeText(
                 this,
                 chip.text.toString() + " is correct answer. WELL DONE!!",
@@ -142,7 +142,7 @@ class TelevisionActivity : AppCompatActivity() {
             ).show()
             chip.setBackgroundResource(R.color.correct)
             scoreAnswer += 1
-        }else {
+        } else {
             Toast.makeText(
                 this,
                 chip.text.toString() + " is incorrect. SORRY!!",
@@ -152,6 +152,6 @@ class TelevisionActivity : AppCompatActivity() {
             correctChip?.setBackgroundResource(R.color.correct)
         }
         scoreTvAnswers.text = scoreAnswer.toString()
-        scoreTvTotal.text = ((scoreAnswer * 100)/ scoreQuestion) .toString()
+        scoreTvTotal.text = ((scoreAnswer * 100) / scoreQuestion).toString()
     }
 }
