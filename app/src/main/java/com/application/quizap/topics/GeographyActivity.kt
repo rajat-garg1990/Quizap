@@ -94,7 +94,7 @@ class GeographyActivity : AppCompatActivity() {
                 call: Call<QuestionResponse>,
                 response: Response<QuestionResponse>
             ) {
-                //var result = QuestionResponse(response.body().results)->
+                //var result = QuestionResponse(response.body().results)
                 var result = response.body()?.results?.let { QuestionResponse(it) }
                 if (result != null) {
                     if (Build.VERSION.SDK_INT >= 24) {

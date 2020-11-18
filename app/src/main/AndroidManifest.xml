@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_quiz_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".topics.PoliticsActivity"></activity>
+        <activity android:name=".topics.PoliticsActivity" />
         <activity android:name=".topics.ComicActivity" />
         <activity android:name=".topics.TelevisionActivity" />
         <activity android:name=".topics.MusicActivity" />
